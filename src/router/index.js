@@ -1,20 +1,21 @@
-// src/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
-    // import Home from "@/views/Home.vue";
-    // import Signalements from "@/views/Signalements.vue";
-    // import Evenements from "@/views/Evenements.vue";
-    // import Login from "@/views/Login.vue";
-
-const routes = [
-//   { path: "/", name: "Home", component: Home },
-//   { path: "/signalements", name: "Signalements", component: Signalements },
-//   { path: "/evenements", name: "Evenements", component: Evenements },
-//   { path: "/login", name: "Login", component: Login },
-];
+import LoginForm from "@/components/LoginForm.vue";
+import home from "@/components/Home.vue";
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: [
+    {
+      path: "/",
+      name: "home",
+      component: home,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: LoginForm,
+    },
+  ],
 });
 
 export default router;

@@ -1,25 +1,24 @@
 <template>
     <div>
         <!-- Barre du haut -->
-        <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
-            <button @click="toggleMenu" class="focus:outline-none">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+        <div style="color: var(--color-secondary)">
+            <button @click="toggleMenu" class="focus:outline-none cursor-pointer">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
-            <h1 class="text-xl font-bold">Ma Plateforme</h1>
-        </header>
+        </div>
 
         <!-- Panneau latéral -->
-        <transition name="slide">
+        <transition id="slide" name="slide">
             <div v-if="menuOpen"
                 class="fixed inset-y-0 left-0 w-64 bg-white shadow-xl z-50 p-6 transform transition-transform duration-300 ease-in-out">
-                <button @click="toggleMenu" class="absolute top-4 right-4 text-gray-700">
+                <button @click="toggleMenu" id="close" class="absolute top-4 right-4 text-gray-700">
                     ✕
                 </button>
 
-                <nav class="mt-10 space-y-4">
+                <nav class="mt-10 space-y-4 ">
                     <RouterLink to="/" class="block text-lg text-gray-800 hover:text-blue-600">Accueil</RouterLink>
                     <RouterLink to="/signalements" class="block text-lg text-gray-800 hover:text-blue-600">Signalements
                     </RouterLink>
@@ -32,7 +31,7 @@
         </transition>
 
         <!-- Overlay sombre -->
-        <div v-if="menuOpen" class="fixed inset-0 bg-black bg-opacity-40 z-40" @click="toggleMenu"></div>
+        <div v-if="menuOpen" id="overlay" class="fixed inset-0 bg-black bg-opacity-10 z-40" @click="toggleMenu"></div>
     </div>
 </template>
 
@@ -68,6 +67,38 @@ const toggleMenu = () => {
 .slide-enter-active,
 .slide-leave-active {
     transition: transform 0.3s ease;
+}
+#slide{
+    background-color: var(--color-primary);
+}
+nav{
+    margin-top:30px
+}
+a{
+    font-size: large;
+    margin: 10px;
+    color: var(--color-secondary);
+}
+a:hover {
+    text-decoration: underline;
+}
+#overlay {
+    backdrop-filter: blur(5px);
+    z-index: 40;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+}
+#close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    cursor: pointer;
 }
 </style>
   
