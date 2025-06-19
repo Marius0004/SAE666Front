@@ -22,7 +22,11 @@
     </div>
     <section id="projects" class=" py-16 px-6 md:px-20">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
-            <Card title="SIGNALEMENT"
+            <div v-for="article in articles" class="mb-6">
+                <Card :title="article.title" :description="article.description" :link="article.link"
+                    :image="article.image" :id="article.id" />
+            </div>
+            <!-- <Card title="SIGNALEMENT"
                 description="Utiliser la carte pour signaler un évènement, un problème ou informer d’une nouveauté"
                 link="/signaler" image="/src/assets/pictures/signalement.jpg" class="justify-self-end" />
 
@@ -35,7 +39,7 @@
 
             <Card title="NEWSLETTER"
                 description="Inscrivez-vous à la newsletter de la Mairie de Rive pour suivre les dernières actus et nouveautés !"
-                link="/newsletter" linkLabel="→ Je m’inscris" image="/src/assets/pictures/newsletter.jpg" />
+                link="/newsletter" linkLabel="→ Je m’inscris" image="/src/assets/pictures/newsletter.jpg" /> -->
 
         </div>
     </section>
@@ -45,6 +49,29 @@
 <script setup>
 import Card from '@/components/Card.vue'
 import SignalerSection from '@/components/SignalerSection.vue';
+import { ref, onMounted } from 'vue';
+const articles = ref([]);
+const fetchArticles = async () => {
+    try {
+        const response = await fetch(import.meta.env.VITE_API_URL + "/signalements", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/ld+json",
+            },
+        });
+        const data = await response.json();
+        articles.value = data.member;
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération des articles:", error);
+    }
+};
+
+onMounted(() => {
+    
+    // Appel initial pour charger les articles
+    fetchArticles();
+});
 </script>
 
 <style scoped>
