@@ -39,10 +39,12 @@
 
         </div>
     </section>
+    <SignalerSection/>
 </template>
 
 <script setup>
 import Card from '@/components/Card.vue'
+import SignalerSection from '@/components/SignalerSection.vue';
 </script>
 
 <style scoped>
