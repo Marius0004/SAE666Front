@@ -88,10 +88,9 @@ const register = async () => {
 </script>
 
 <template>
-    <div class="contenaireForm">
+    <div id="home">
+        <h2>{{ mode === 'login' ? 'Connexion' : 'Inscription' }}</h2>
         <form class="form" @submit.prevent="handleSubmit">
-            <h2>{{ mode === 'login' ? 'Connexion' : 'Inscription' }}</h2>
-
             <span class="input-span">
                 <label for="email" class="label">Email</label>
                 <input type="email" name="email" id="email" v-model="email" required />
@@ -123,14 +122,33 @@ const register = async () => {
 </template>
 
 <style scoped>
-.contenaireForm {
-    width: 450px;
-    margin: 0 auto;
+#home {
+    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70vh;
+    height: 90vh;
+    background-color: var(--color-white);
+    overflow: hidden;
+    flex-direction: column;
+        align-items: center;
 }
+
+#home::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 900px;
+    height: 900px;
+    background-image: url(/src/assets/pictures/feuilles.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    z-index: 0;
+    
+}
+
+
+
 
 .error-message {
     color: red;
@@ -141,7 +159,7 @@ const register = async () => {
     box-shadow: 0px 1px 20px 0px rgb(39 39 39 / 31%);
     padding: 10px;
     border-radius: 3%;
-    background-color: rgb(249, 249, 249);
+    background-color: var(--color-secondary);
     --bg-light: #efefef;
     --bg-dark: #707070;
     --clr: #58bc82;
@@ -152,6 +170,10 @@ const register = async () => {
     gap: 1rem;
     width: 100%;
     max-width: 400px;
+    height: 70%;
+    position: relative;
+        z-index: 1;
+        width: 30%;
 }
 
 .form .input-span {
@@ -280,5 +302,13 @@ button:hover .arrow {
 
 button:hover .arrow:before {
     right: 0;
+}
+h2 {
+    color: var(--color-primary);
+    text-align: center;
+    
+    color: var(--color-primary);
+        font-size: 89px;
+        font-weight: 700;
 }
 </style>

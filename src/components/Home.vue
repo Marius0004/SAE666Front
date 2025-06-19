@@ -11,7 +11,7 @@
                         d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
                 </svg>
                 <div class="text">
-                    Découvrir nos projet
+                À propos de nous
                 </div>
             </button>
         </div>
@@ -21,35 +21,23 @@
         <router-view />
     </div>
     <section id="projects" class=" py-16 px-6 md:px-20">
+        <input v-model="searchQuery" type="text" id="search" placeholder="Rechercher un signalement par titre..."
+            class="p-2  rounded-md w-full" />
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
-            <div v-for="article in articles" class="mb-6">
-                <Card :title="article.title" :description="article.description" :link="article.link"
-                    :image="article.image" :id="article.id" />
+            <div v-for="article in filteredArticles.slice(0, 4)" class="mb-6">
+                <Card :title="article.title" :description="article.titre" :link="article.link" :image="article.image"
+                    :id="article.id" />
             </div>
-            <!-- <Card title="SIGNALEMENT"
-                description="Utiliser la carte pour signaler un évènement, un problème ou informer d’une nouveauté"
-                link="/signaler" image="/src/assets/pictures/signalement.jpg" class="justify-self-end" />
-
-            <Card title="NEWSLETTER"
-                description="Inscrivez-vous à la newsletter de la Mairie de Rive pour suivre les dernières actus et nouveautés !"
-                link="/newsletter" linkLabel="→ Je m’inscris" image="/src/assets/pictures/newsletter.jpg" />
-            <Card title="SIGNALEMENT"
-                description="Utiliser la carte pour signaler un évènement, un problème ou informer d’une nouveauté"
-                link="/signaler" image="/src/assets/pictures/signalement.jpg" class="justify-self-end" />
-
-            <Card title="NEWSLETTER"
-                description="Inscrivez-vous à la newsletter de la Mairie de Rive pour suivre les dernières actus et nouveautés !"
-                link="/newsletter" linkLabel="→ Je m’inscris" image="/src/assets/pictures/newsletter.jpg" /> -->
-
         </div>
     </section>
-    <SignalerSection/>
+    <SignalerSection />
 </template>
 
 <script setup>
 import Card from '@/components/Card.vue'
 import SignalerSection from '@/components/SignalerSection.vue';
 import { ref, onMounted } from 'vue';
+import { computed } from 'vue';
 const articles = ref([]);
 const fetchArticles = async () => {
     try {
@@ -61,6 +49,8 @@ const fetchArticles = async () => {
         });
         const data = await response.json();
         articles.value = data.member;
+        articles.value = data.member
+            .sort((a, b) => b.id - a.id);
 
     } catch (error) {
         console.error("Erreur lors de la récupération des articles:", error);
@@ -72,6 +62,13 @@ onMounted(() => {
     // Appel initial pour charger les articles
     fetchArticles();
 });
+const searchQuery = ref("");
+
+const filteredArticles = computed(() =>
+    articles.value.filter((article) =>
+        article.titre?.toLowerCase().includes(searchQuery.value.toLowerCase())
+    )
+);
 </script>
 
 <style scoped>
@@ -164,5 +161,18 @@ p {
 
 .text {
     margin: 0 1.5em
+}
+#search{
+    margin-bottom: 1.5em;
+    color: var(--color-primary); 
+    background-color: white;
+    box-shadow:  0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#search::placeholder {
+    color: var(--color-primary);
+}
+#search:focus {
+    outline: none;
+    border: solid 2px var(--color-primary);
 }
 </style>

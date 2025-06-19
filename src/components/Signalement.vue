@@ -1,4 +1,5 @@
 <template>
+    
     <div v-if="signalement" class="signalement-card">
       <img
         v-if="signalement.image"
@@ -6,8 +7,15 @@
         alt="Image du signalement"
         class="signalement-image"
       />
+
       <div class="signalement-content">
+        <div id="signalement-header">
         <h2>{{ signalement.titre }}</h2>
+        
+        <div class="back-button-container">
+    <RouterLink to="/" class="back-button">← Retour à l’accueil</RouterLink>
+    </div>
+        </div>
         <div class="badges">
           <span class="badge tag">{{ signalement.tags }}</span>
           <span class="badge etat" :class="signalement.etat.toLowerCase()">
@@ -183,4 +191,28 @@ h2 {
   font-size: 1.2rem;
   color: #555;
 }
+.back-button-container {
+  max-width: 600px;
+  text-align: left;
+}
+
+.back-button {
+  display: inline-block;
+  color: var(--color-primary, #2c3e50);
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  transition: color 0.2s ease;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+  color: #1f2937;
+}
+#signalement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 </style>
