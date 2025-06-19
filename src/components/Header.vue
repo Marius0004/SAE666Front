@@ -15,8 +15,15 @@
             <RouterLink to="/" class="block text-lg text-gray-800 hover:text-blue-600">Accueil</RouterLink>
             <RouterLink to="/signalements" class="block text-lg text-gray-800 hover:text-blue-600">Signalements
             </RouterLink>
-            <RouterLink to="/login" class="block text-lg text-gray-800 hover:text-blue-600">Connexion
-            </RouterLink>
+            <div v-if="user">
+                <RouterLink :to="`/profile/${userId}`" class="block text-lg text-gray-800 hover:text-blue-600">Profil
+                </RouterLink>
+            </div>
+            <div v-else>
+                <RouterLink to="/login" class="block text-lg text-gray-800 hover:text-blue-600">Connexion
+                </RouterLink>
+            </div>
+
         </nav>
         <!-- partie connexion  -->
         <div v-if="user">
@@ -37,12 +44,21 @@ import { useAuthStore } from '@/stores/useAuthStore'
 import { storeToRefs } from 'pinia'
 import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
 import Menu from './Menu.vue'
 const router = useRouter()
 const auth = useAuthStore()
 const { user } = storeToRefs(auth)  
+const userId = ref("")
 
-
+onMounted(() => {
+    // récupère userId depuis localStorage si disponible
+    if (typeof localStorage !== 'undefined') {
+        userId.value = localStorage.getItem('userId') || ""
+    }
+    // tu peux aussi envisager de récupérer userId depuis le store directement si tu le stockes dedans
+})
+console.log(userId.value);
 function logout() {
     auth.logout()
     router.push('/login')

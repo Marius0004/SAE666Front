@@ -1,6 +1,6 @@
 <script setup>
 import headerPage from './components/Header.vue'
-
+import footerPage from './components/Footer.vue'
 </script>
 
 <template>
@@ -8,6 +8,9 @@ import headerPage from './components/Header.vue'
     <headerPage />
   </header>
   <router-view />
+  <footer>
+    <footerPage />
+  </footer>
 </template>
 
 <style scoped>

@@ -11,7 +11,6 @@
       <div class="signalement-content">
         <div id="signalement-header">
         <h2>{{ signalement.titre }}</h2>
-        
         <div class="back-button-container">
     <RouterLink to="/" class="back-button">← Retour à l’accueil</RouterLink>
     </div>

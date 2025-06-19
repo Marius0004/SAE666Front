@@ -11,7 +11,7 @@
                         d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
                 </svg>
                 <div class="text">
-                À propos de nous
+                    À propos de nous
                 </div>
             </button>
         </div>
@@ -30,7 +30,11 @@
             </div>
         </div>
     </section>
-    <SignalerSection />
+    <div id="signaler-form">
+        <div id="signalerContent">
+            <SignalerSection />
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -101,7 +105,34 @@ const filteredArticles = computed(() =>
     z-index: 1;
     width: 30%;
 }
-
+#signaler-form {
+    position: relative;
+        display: flex;
+        justify-content: space-evenly;
+        height: 100vh;
+        background-color: var(--color-white);
+        
+        overflow: hidden;
+}
+#signaler-form::before {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 900px;
+    height: 900px;
+    background-image: url(/src/assets/pictures/feuilles.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    z-index: 0;
+    transform: rotate(180deg);
+}
+#signalerContent {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
 img {
     width: 500px;
     height: 403px;
