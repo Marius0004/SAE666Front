@@ -2,7 +2,10 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useToast } from "vue-toastification";
+import { useAuthStore } from '@/stores/useAuthStore'
 
+
+const auth = useAuthStore()
 const router = useRouter();
 const toast = useToast();
 const mode = ref('login');
@@ -39,10 +42,9 @@ const handleLogin = async () => {
         }
 
         const data = await response.json();
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', data.user);
         localStorage.setItem('userId', data.id);
         toast.success("Connexion réussie !");
+        auth.login({ email: data.user }, data.token);
         router.push('/'); // Redirige vers l'accueil après connexion
     } catch (error) {
         toast.error("Échec de la connexion. Vérifiez vos informations.");

@@ -22,8 +22,6 @@
                     <RouterLink to="/" class="block text-lg text-gray-800 hover:text-blue-600">Accueil</RouterLink>
                     <RouterLink to="/signalements" class="block text-lg text-gray-800 hover:text-blue-600">Signalements
                     </RouterLink>
-                    <RouterLink to="/evenements" class="block text-lg text-gray-800 hover:text-blue-600">Évènements
-                    </RouterLink>
                     <RouterLink to="/login" class="block text-lg text-gray-800 hover:text-blue-600">Connexion
                     </RouterLink>
                 </nav>

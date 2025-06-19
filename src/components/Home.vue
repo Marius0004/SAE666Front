@@ -81,6 +81,7 @@ img {
     height: 403px;
     position: relative;
     z-index: 1;
+    margin-top: 50px;
 }
 
 h1 {

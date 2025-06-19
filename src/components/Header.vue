@@ -15,14 +15,12 @@
             <RouterLink to="/" class="block text-lg text-gray-800 hover:text-blue-600">Accueil</RouterLink>
             <RouterLink to="/signalements" class="block text-lg text-gray-800 hover:text-blue-600">Signalements
             </RouterLink>
-            <RouterLink to="/evenements" class="block text-lg text-gray-800 hover:text-blue-600">Évènements
-            </RouterLink>
             <RouterLink to="/login" class="block text-lg text-gray-800 hover:text-blue-600">Connexion
             </RouterLink>
         </nav>
         <!-- partie connexion  -->
         <div v-if="user">
-            <span class="text-lg">Bienvenue, {{ user }}</span>
+            <span class="text-lg">Bienvenue, {{ user.email }}</span>
             <button class="btn" @click="logout">Se déconnecter</button>
         </div>
         <div v-else>
@@ -34,20 +32,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+
+import { useAuthStore } from '@/stores/useAuthStore'
+import { storeToRefs } from 'pinia'
 import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
 import Menu from './Menu.vue'
+const router = useRouter()
+const auth = useAuthStore()
+const { user } = storeToRefs(auth)  
 
-const user = ref(null)
 
-onMounted(() => {
-    user.value = localStorage.getItem('user')
-})
-console.log(user)
 function logout() {
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    user.value = null
+    auth.logout()
     router.push('/login')
 }
 </script>
