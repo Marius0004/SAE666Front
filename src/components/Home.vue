@@ -15,14 +15,34 @@
                 </div>
             </button>
         </div>
-        <img src="../assets/pictures/mur.png" alt="mur vegetalisé" />
+        <img src="../assets/pictures/mur.png" alt="mur vegetalisé" class="rounded-lg" />
     </div>
     <div id="projects">
         <router-view />
     </div>
+    <section id="projects" class=" py-16 px-6 md:px-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+            <Card title="SIGNALEMENT"
+                description="Utiliser la carte pour signaler un évènement, un problème ou informer d’une nouveauté"
+                link="/signaler" image="/src/assets/pictures/signalement.jpg" class="justify-self-end" />
+
+            <Card title="NEWSLETTER"
+                description="Inscrivez-vous à la newsletter de la Mairie de Rive pour suivre les dernières actus et nouveautés !"
+                link="/newsletter" linkLabel="→ Je m’inscris" image="/src/assets/pictures/newsletter.jpg" />
+            <Card title="SIGNALEMENT"
+                description="Utiliser la carte pour signaler un évènement, un problème ou informer d’une nouveauté"
+                link="/signaler" image="/src/assets/pictures/signalement.jpg" class="justify-self-end" />
+
+            <Card title="NEWSLETTER"
+                description="Inscrivez-vous à la newsletter de la Mairie de Rive pour suivre les dernières actus et nouveautés !"
+                link="/newsletter" linkLabel="→ Je m’inscris" image="/src/assets/pictures/newsletter.jpg" />
+
+        </div>
+    </section>
 </template>
 
 <script setup>
+import Card from '@/components/Card.vue'
 </script>
 
 <style scoped>
@@ -53,7 +73,7 @@
 #content {
     position: relative;
     z-index: 1;
-    width: 40%;
+    width: 30%;
 }
 
 img {
@@ -66,7 +86,7 @@ img {
 h1 {
     color: var(--color-primary);
     font-size: 89px;
-    font-weight:700;
+    font-weight: 700;
 }
 
 h4 {
@@ -80,6 +100,7 @@ p {
     font-size: 24px;
     font-weight: 300;
 }
+
 /* From Uiverse.io by reshades */
 .button {
     margin-top: 50px;
@@ -101,7 +122,7 @@ p {
 
 .button svg {
     width: 1.6em;
-    margin:0 0.8em 1em;
+    margin: 0 0.8em 1em;
     position: absolute;
     display: flex;
     transition: all 0.6s ease;
