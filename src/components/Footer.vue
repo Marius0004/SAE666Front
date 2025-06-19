@@ -5,11 +5,19 @@
           <img src="../assets/pictures/logoSombre.png" alt="Logo Rive" />
         </div>
         <nav class="nav">
-          <RouterLink to="/">ACCUEIL</RouterLink>
-          <RouterLink to="/projects">NOS PROJETS</RouterLink>
-          <RouterLink to="/signalements">SIGNALEMENT</RouterLink>
-          <RouterLink to="/newsletter">NEWSLETTER</RouterLink>
-          <RouterLink to="/login">CONNEXION</RouterLink>
+            <RouterLink to="/" class="block text-lg text-gray-800 hover:text-blue-600">Accueil</RouterLink>
+            <RouterLink to="/signalements" class="block text-lg text-gray-800 hover:text-blue-600">Signalements
+            </RouterLink>
+            <RouterLink to="/nous" class="block text-lg text-gray-800 hover:text-blue-600">À propos de nous
+            </RouterLink>
+            <div v-if="user">
+                <RouterLink :to="`/profil`" class="block text-lg text-gray-800 hover:text-blue-600">Profil
+                </RouterLink>
+            </div>
+            <div v-else>
+                <RouterLink to="/login" class="block text-lg text-gray-800 hover:text-blue-600">Connexion
+                </RouterLink>
+            </div>
         </nav>
       </div>
       <p class="copyright">Copyright © Ville de Rive - 2025</p>

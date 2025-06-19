@@ -10,9 +10,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
                 </svg>
-                <div class="text">
-                    À propos de nous
-                </div>
+                <RouterLink to="/nous" class="text">À propos de nous</RouterLink>
             </button>
         </div>
         <img src="../assets/pictures/mur.png" alt="mur vegetalisé" class="rounded-lg" />
@@ -35,11 +33,15 @@
             <SignalerSection />
         </div>
     </div>
+    <div id="newsletter-section">
+        <NewsletterSection />
+    </div>
 </template>
 
 <script setup>
 import Card from '@/components/Card.vue'
 import SignalerSection from '@/components/SignalerSection.vue';
+import NewsletterSection from '@/components/NewsletterSection.vue';
 import { ref, onMounted } from 'vue';
 import { computed } from 'vue';
 const articles = ref([]);
@@ -205,5 +207,12 @@ p {
 #search:focus {
     outline: none;
     border: solid 2px var(--color-primary);
+}
+#newsletter-section {
+    height: 100vh;
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
 }
 </style>

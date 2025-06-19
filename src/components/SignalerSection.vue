@@ -94,6 +94,8 @@
   <script setup>
 import { ref, onMounted } from 'vue'
 import L from 'leaflet'
+import { useToast } from 'vue-toastification'
+const toast = useToast();
 
 const formData = ref({
   titre: '',

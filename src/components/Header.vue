@@ -15,8 +15,10 @@
             <RouterLink to="/" class="block text-lg text-gray-800 hover:text-blue-600">Accueil</RouterLink>
             <RouterLink to="/signalements" class="block text-lg text-gray-800 hover:text-blue-600">Signalements
             </RouterLink>
+            <RouterLink to="/nous" class="block text-lg text-gray-800 hover:text-blue-600">À propos de nous
+            </RouterLink>
             <div v-if="user">
-                <RouterLink :to="`/profile/${userId}`" class="block text-lg text-gray-800 hover:text-blue-600">Profil
+                <RouterLink :to="`/profil`" class="block text-lg text-gray-800 hover:text-blue-600">Profil
                 </RouterLink>
             </div>
             <div v-else>
@@ -51,14 +53,8 @@ const auth = useAuthStore()
 const { user } = storeToRefs(auth)  
 const userId = ref("")
 
-onMounted(() => {
-    // récupère userId depuis localStorage si disponible
-    if (typeof localStorage !== 'undefined') {
-        userId.value = localStorage.getItem('userId') || ""
-    }
-    // tu peux aussi envisager de récupérer userId depuis le store directement si tu le stockes dedans
-})
-console.log(userId.value);
+
+
 function logout() {
     auth.logout()
     router.push('/login')
